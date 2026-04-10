@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- This project is compiled by fsharp-wasm only — it does NOT build on standard .NET.
+         Use: fsharp-wasm compile Wasmecto.fsproj --outDir dist/
+         Output: dist/wasmecto.wasm -->
+    <AssemblyName>Wasmecto</AssemblyName>
+    <RootNamespace>Wasmecto</RootNamespace>
+    <Description>Minimal Expecto-compatible test framework for WasmGC targets.</Description>
+    <Authors>fsharp-wasm compiler team</Authors>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Types.fs" />
+    <Compile Include="ExnState.fs" />
+    <Compile Include="Expect.fs" />
+    <Compile Include="DSL.fs" />
+    <Compile Include="Runner.fs" />
+  </ItemGroup>
+  <!-- Reference fsharp-wasm-core for BCL stubs (no NuGet needed — WasmGC only) -->
+  <ItemGroup>
+    <ProjectReference Include="../../fsharp-wasm-core/FSharp.Wasm.Core/FSharp.WasmCore.fsproj" />
+  </ItemGroup>
+</Project>

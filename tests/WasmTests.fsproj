@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- Compiled by fsharp-wasm → wasmtests.wasm  (not standard .NET) -->
+    <AssemblyName>WasmTests</AssemblyName>
+    <RootNamespace>WasmTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Tests.Math.fs" />
+    <Compile Include="Tests.Dictionary.fs" />
+    <Compile Include="Tests.Stack.fs" />
+    <Compile Include="Tests.StringBuilder.fs" />
+    <Compile Include="Main.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../src/Wasmecto.fsproj" />
+  </ItemGroup>
+</Project>
