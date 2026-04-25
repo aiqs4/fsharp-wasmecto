@@ -12,7 +12,7 @@ OUT="$ROOT/dist"
 mkdir -p "$OUT"
 
 echo "==> Compiling Wasmecto + tests via fsharp-wasm..."
-dotnet run --project "$FSHARP_WASM/tools/fsharp-wasm-cli" -- \
+dotnet run --project "$FSHARP_WASM/tools/FSharp.Wasm.Cli" -- \
     "$TEST_PROJ/WasmTests.fsproj" \
     --outDir "$OUT" \
     --outFile wasmtests.wasm
