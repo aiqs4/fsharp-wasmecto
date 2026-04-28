@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- This project is compiled by fsharp-wasm only — it does NOT build on standard .NET.
-         Use: fsharp-wasm compile Wasmecto.fsproj --outDir dist/
+         Use: fsharp-wasm compile Wasmecto.fsproj \-\-outDir dist/
          Output: dist/wasmecto.wasm -->
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>Wasmecto</AssemblyName>
     <RootNamespace>Wasmecto</RootNamespace>
     <Description>Minimal Expecto-compatible test framework for WasmGC targets.</Description>

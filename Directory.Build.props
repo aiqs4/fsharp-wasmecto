@@ -1,0 +1,5 @@
+<Project>
+  <!-- Sucht nach der Directory.Build.props im übergeordneten Ordner -->
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"
+          Condition="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../')) != ''" />
+</Project>

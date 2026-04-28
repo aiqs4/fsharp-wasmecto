@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- Compiled by fsharp-wasm → wasmtests.wasm  (not standard .NET) -->
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>WasmTests</AssemblyName>
     <RootNamespace>WasmTests</RootNamespace>
   </PropertyGroup>
