@@ -62,6 +62,6 @@ module DictionaryTests =
             testCase "Enumerate KVPs" <| fun () ->
                 let d = Dictionary<int, int>()
                 for i in 1..5 do d.[i] <- i
-                let sum = Seq.sumBy (fun (kvp: KeyValuePair<int,int>) -> kvp.Value) d
+                let sum = d.SumValues id   // Dictionary deliberately has no IEnumerable<KVP> (WasmGC vtable limitation)
                 Expect.equal sum 15 "sum of values 1..5 = 15"
         ]

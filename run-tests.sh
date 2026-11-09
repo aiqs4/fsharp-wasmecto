@@ -4,12 +4,18 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT="$(cd "$SCRIPT_DIR" && pwd)"
+ROOT="$SCRIPT_DIR"
 FSHARP_WASM="${FSHARP_WASM:-$ROOT/..}"
 TEST_PROJ="${1:-$ROOT/tests}"
 OUT="$ROOT/dist"
 
 mkdir -p "$OUT"
+
+# The test project reaches fsharp-wasm-core through a ProjectReference. FCS wants the
+# reference assembly (obj/<cfg>/<tfm>/ref/*.dll) on disk, so build it first.
+echo "==> Building project references (reference assemblies)..."
+dotnet build "$FSHARP_WASM/fsharp-wasm-core/FSharp.Wasm.Core/FSharp.WasmCore.fsproj" \
+    -c Release --nologo -v q
 
 echo "==> Compiling Wasmecto + tests via fsharp-wasm..."
 dotnet run --project "$FSHARP_WASM/tools/FSharp.Wasm.Cli" -- \
@@ -17,13 +23,13 @@ dotnet run --project "$FSHARP_WASM/tools/FSharp.Wasm.Cli" -- \
     --outDir "$OUT"
 
 echo "==> Running tests in wasmtime..."
-wasmtime run "$OUT/wasmtests.wasm" 2>&1
-STATUS=$?
+STATUS=0
+wasmtime run "$OUT/wasmtests.wasm" 2>&1 || STATUS=$?
 
-if [ $STATUS -eq 0 ]; then
+if [ "$STATUS" -eq 0 ]; then
     echo "All tests passed."
 else
-    echo "FAILED: $STATUS test(s) failed."
+    echo "FAILED: exit code $STATUS."
 fi
 
-exit $STATUS
+exit "$STATUS"
